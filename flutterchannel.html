@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter & Dart Engineering Resource Hub</title>
+    <style>
+        /* --- Clean & Professional System Reset --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1E293B;
+            background-color: #F8FAFC;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        /* --- Typography --- */
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-top: 0;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #64748B;
+            margin-bottom: 32px;
+        }
+
+        h3.phase-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #475569;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-left: 3px solid #CBD5E1;
+            padding-left: 10px;
+        }
+
+        p {
+            font-size: 15px;
+            color: #334155;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        /* --- NAVIGATION TABS SYSTEM --- */
+        .tabs-nav {
+            display: flex;
+            gap: 8px;
+            border-bottom: 2px solid #E2E8F0;
+            margin-bottom: 32px;
+            padding-bottom: 1px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #64748B;
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            color: #1E293B;
+        }
+
+        .tab-btn.active {
+            color: #2563EB;
+        }
+
+        .tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #2563EB;
+            border-radius: 3px;
+        }
+
+        /* --- Tab Content Visibility --- */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Level Badges --- */
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .badge-l1 {
+            background: #DCFCE7;
+            color: #15803D;
+        }
+
+        .badge-l2 {
+            background: #FEF9C3;
+            color: #A16207;
+        }
+
+        .badge-l3 {
+            background: #FFEDD5;
+            color: #C2410C;
+        }
+
+        .badge-l4 {
+            background: #F3E8FF;
+            color: #6B21A8;
+        }
+
+        .badge-topic {
+            background: #F1F5F9;
+            color: #475569;
+            margin-top: 8px;
+        }
+
+        /* --- Section 1: Playlist Cards --- */
+        .resource-card {
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            background: #FFFFFF;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0F172A;
+            margin-bottom: 4px;
+        }
+
+        .card-creator {
+            font-size: 13px;
+            font-weight: 500;
+            color: #2563EB;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: #64748B;
+            margin-bottom: 14px;
+        }
+
+        /* --- Links & Buttons --- */
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2563EB;
+            text-decoration: none;
+        }
+
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Section 2: Topic Grid Layout --- */
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .topic-box {
+            border: 1px solid #E2E8F0;
+            background-color: #F8FAFC;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .topic-box strong {
+            display: block;
+            font-size: 15px;
+            color: #0F172A;
+            margin-bottom: 6px;
+        }
+
+        .topic-box p {
+            font-size: 13.5px;
+            color: #475569;
+            margin-bottom: 12px;
+        }
+
+        .topic-links {
+            border-top: 1px dashed #E2E8F0;
+            padding-top: 12px;
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* --- Section 3: Docs Grid Layout --- */
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .doc-box {
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+            padding: 18px;
+            border-radius: 8px;
+            border-top: 3px solid #64748B;
+        }
+
+        .doc-box-prime {
+            border-top-color: #2563EB;
+        }
+
+        .doc-box strong {
+            display: block;
+            font-size: 14px;
+            color: #0F172A;
+            margin-bottom: 6px;
+        }
+
+        .doc-box p {
+            font-size: 13px;
+            color: #64748B;
+            margin-bottom: 12px;
+        }
+
+        /* --- Protocols/Tips Styling --- */
+        .protocol-list {
+            list-style: none;
+            padding: 0;
+            margin: 24px 0 0 0;
+        }
+
+        .protocol-list li {
+            font-size: 14px;
+            color: #475569;
+            padding: 10px 0;
+            border-bottom: 1px dashed #E2E8F0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .protocol-list li:last-child {
+            border-bottom: none;
+        }
+
+        .protocol-list li::before {
+            content: "✓";
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        /* --- Minimal Footer Callout --- */
+        .footer-note {
+            background: #F8FAFC;
+            border-left: 4px solid #CBD5E1;
+            padding: 16px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: #64748B;
+            margin-top: 48px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Flutter & Dart Engineering Resource Hub</h1>
+        <div class="subtitle">An enterprise-ready, isolated workspace containing curriculum playlists, functional
+            indexes, and design libraries.</div>
+
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab(event, 'playlists')">1. Full Playlists</button>
+            <button class="tab-btn" onclick="switchTab(event, 'topics')">2. Topic-Wise Index</button>
+            <button class="tab-btn" onclick="switchTab(event, 'docs')">3. Docs & Animation Gems</button>
+        </div>
+
+
+        <div id="playlists" class="tab-content active">
+            <p>A sequential list of courses containing verified content trackers. Choose your current experience level
+                to begin streaming.</p>
+
+            <h3 class="phase-title">Phase 1: Foundations & Core Beginner Tracks</h3>
+
+            <div class="resource-card">
+                <span class="badge badge-l1">Absolute Beginner</span>
+                <div class="card-title">Flutter Tutorial for Absolute Beginners</div>
+                <div class="card-creator">Channel: Afnan Sarkar</div>
+                <div class="card-desc">Foundational overview covering system installations, mobile simulator setups,
+                    structural mechanics, and compiling your initial mobile codebase.</div>
+                <a href="https://www.youtube.com/watch?v=_8xOqMhUyjk&list=PLy0nhnjSE4irkzR9mbo70J2iKbf4a36y5"
+                    target="_blank" class="btn-link">Open Playlist ↗</a>
+            </div>
+
+            <div class="resource-card">
+                <span class="badge badge-l1">Beginner Track</span>
+                <div class="card-title">Flutter Complete Beginner Course Series</div>
+                <div class="card-creator">Channel: Code Red Clan</div>
+                <div class="card-desc">Comprehensive beginner-friendly module diving straight into app structures,
+                    structural layouts, and standard configuration guidelines.</div>
+                <a href="https://www.youtube.com/watch?v=-Tr-DtCLxfM&list=PLNRu0tXqIbWfqDD7o9_Xgroz3WekNzGNR"
+                    target="_blank" class="btn-link">Open Playlist ↗</a>
+            </div>
+
+            <h3 class="phase-title">Phase 2: UI Engineering & Syntax Basics</h3>
+            <div class="resource-card">
+                <span class="badge badge-l2">Beginner Track A</span>
+                <div class="card-title">Dart & Flutter Complete Training Course</div>
+                <div class="card-creator">Channel: WsCube Tech</div>
+                <div class="card-desc">Step-by-step tutorials tracking conditional properties, stateless interface
+                    modules, list rendering layouts, and widget styling rules.</div>
+                <a href="https://www.youtube.com/watch?v=jqxz7QvdWk8&list=PLjVLYmrlmjGfGLShoW0vVX_tcyT8u1Y3E"
+                    target="_blank" class="btn-link">Open Playlist ↗</a>
+            </div>
+
+            <div class="resource-card">
+                <span class="badge badge-l2">Beginner Track B</span>
+                <div class="card-title">Flutter UI Concepts & App Architecture</div>
+                <div class="card-creator">Channel: Mitch Koko</div>
+                <div class="card-desc">Highly visual layout processing focusing on modern UI design kits, grid maps,
+                    container customization parameters, and input controllers.</div>
+                <a href="https://www.youtube.com/watch?v=v5Tc_VXbpnk&list=PLlvRDpXh1Se6PSaKx30YpQApAm9u9Pv-t"
+                    target="_blank" class="btn-link">Open Playlist ↗</a>
+            </div>
+
+            <div class="resource-card">
+                <span class="badge badge-l2">Beginner Track C</span>
+                <div class="card-title">Flutter Crash Course for Beginners</div>
+                <div class="card-creator">Channel: The Net Ninja</div>
+                <div class="card-desc">Clean modular introduction mapping layout dimensions, assets initialization
+                    pipelines, form fields, and baseline navigation scopes.</div>
+                <a href="https://www.youtube.com/watch?v=1ukSR1GRtMU&list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ"
+                    target="_blank" class="btn-link">Open Playlist ↗</a>
+            </div>
+
+            <h3 class="phase-title">Phase 3: Data Management & App Modules</h3>
+            <div class="resource-card">
+                <span class="badge badge-l3">Intermediate Track A</span>
+                <div class="card-title">Complete 12-Hour Flutter Masterclass</div>
+                <div class="card-creator">Channel: Rivaan Ranawat (via freeCodeCamp.org)</div>
+                <div class="card-desc">A deep, comprehensive camp tracking asynchronous network handling, REST API
+                    integration pipelines, JSON parsing structures, and remote authentications.</div>
+                <a href="https://www.youtube.com/watch?v=CzRQ9mnmh44&t=52963s" target="_blank" class="btn-link">Open
+                    Course ↗</a>
+            </div>
+
+            <div class="resource-card">
+                <span class="badge badge-l3">Intermediate Track B</span>
+                <div class="card-title">Practical Project Builds & State Lifecycles</div>
+                <div class="card-creator">Channel: Akshit Madan</div>
+                <div class="card-desc">Hands-on layout development prioritizing state transformations, database binding
+                    models, and clean UI component separation.</div>
+                <a href="https://www.youtube.com/watch?v=XbQ-7zwuOdE&list=PL9n0l8rSshSmNoWh4KQ28nJn8npfMtzcs"
+                    target="_blank" class="btn-link">Open Playlist ↗</a>
+            </div>
+
+            <h3 class="phase-title">Phase 4: Advanced Architectures</h3>
+            <div class="resource-card">
+                <span class="badge badge-l4">Upper-Intermediate</span>
+                <div class="card-title">Advanced Flutter: Multi-Threading & State Control</div>
+                <div class="card-creator">Channel: Vandad Nahavandipoor</div>
+                <div class="card-desc">Enterprise engineering tracks focusing on intricate state architectures, streams
+                    processing, performance profile optimizations, and advanced design protocols.</div>
+                <a href="https://www.youtube.com/watch?v=IfUjHNODRoM&list=PL6yRaaP0WPkVtoeNIGqILtRAgd3h2CNpT"
+                    target="_blank" class="btn-link">Open Playlist ↗</a>
+            </div>
+        </div>
+
+
+        <div id="topics" class="tab-content">
+            <p>Target precise native engine structures and coding patterns directly depending on your current
+                development milestones:</p>
+
+            <div class="topic-grid">
+                <div class="topic-box">
+                    <div>
+                        <span class="badge badge-topic">Core Foundations</span>
+                        <strong>Dart & Counter Architecture</strong>
+                        <p>Variables lifecycle execution, functional syntax mappings, array lists parsing, and building
+                            your cornerstone app configurations mapping core data structures.</p>
+                    </div>
+                    <div class="topic-links">
+                        <a href="https://www.youtube.com/watch?v=-uphCG2cL1E" target="_blank" class="btn-link">↳ Counter
+                            App Guide (Tech With Otabek) ↗</a>
+                    </div>
+                </div>
+
+                <div class="topic-box">
+                    <div>
+                        <span class="badge badge-topic">State Engine</span>
+                        <strong>Provider State Management</strong>
+                        <p>Implement globally shared states architecture, isolate structural business blocks away from
+                            widget trees, and master listener optimization paradigms.</p>
+                    </div>
+                    <div class="topic-links">
+                        <a href="https://www.youtube.com/watch?v=SlU_nb0Kz_o&list=PLNRu0tXqIbWc5k_KGU7DJtWBPsvG9RUqx"
+                            target="_blank" class="btn-link">↳ Provider Deep Dive (Code Red Clan) ↗</a>
+                    </div>
+                </div>
+
+                <div class="topic-box">
+                    <div>
+                        <span class="badge badge-topic">Local Mutations</span>
+                        <strong>StatefulBuilder Sub-Trees</strong>
+                        <p>Optimize layout builds rendering boundaries by selectively mutating contextual parameters
+                            down internal dialogs or sheet views fields without rebuilding parent layouts.</p>
+                    </div>
+                    <div class="topic-links">
+                        <a href="https://www.youtube.com/watch?v=UWrgjZmsbBc&list=PLwzvKIdz8qvwHlI0GidT-CqkbETEtPSLj"
+                            target="_blank" class="btn-link">↳ StatefulBuilder Track (Rohit) ↗</a>
+                        <a href="https://www.youtube.com/watch?v=h46lrbg8qUg&t=5s" target="_blank" class="btn-link">↳
+                            Deep Configuration (WsCube Tech) ↗</a>
+                    </div>
+                </div>
+
+                <div class="topic-box">
+                    <div>
+                        <span class="badge badge-topic">State Engine</span>
+                        <strong>Provider State Management</strong>
+                        <p>Implement globally shared states architecture, isolate structural business blocks away from
+                            widget trees, and master listener optimization paradigms.</p>
+                    </div>
+                    <div class="topic-links">
+                        <a href="https://www.youtube.com/watch?v=SlU_nb0Kz_o&list=PLNRu0tXqIbWc5k_KGU7DJtWBPsvG9RUqx"
+                            target="_blank" class="btn-link">↳ Provider Deep Dive (Code Red Clan) ↗</a>
+                        <a href="https://www.youtube.com/watch?v=FUDhozpnTUw&t=1s" target="_blank" class="btn-link">↳
+                            Provider State Map (Flutter Map) ↗</a>
+                    </div>
+                </div>
+                <div class="topic-box">
+                    <div>
+                        <span class="badge badge-topic">Reactive State</span>
+                        <strong>Riverpod State Management</strong>
+                        <p>Explore compile-safe, reactive, and completely decoupled state management pipelines without
+                            depending directly on the Flutter BuildContext layer.</p>
+                    </div>
+                    <div class="topic-links">
+                        <a href="https://www.youtube.com/watch?v=7Cp1GlmHTGE" target="_blank" class="btn-link">↳
+                            Riverpod Ecosystem (Flutter Map) ↗</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="docs" class="tab-content">
+            <p>A hand-selected registry of verified core guidelines directories, motion design specs, and open-source
+                packages filters:</p>
+
+            <div class="docs-grid">
+                <div class="doc-box doc-box-prime">
+                    <strong>Official Flutter Documentation</strong>
+                    <p>The core framework manual handling runtime syntax parameters, compilation engines, localized
+                        testing schemes, and deployment rules.</p>
+                    <a href="https://docs.flutter.dev/" target="_blank" class="btn-link">Read Docs ↗</a>
+                </div>
+                <div class="doc-box doc-box-prime">
+                    <strong>Pub.dev Global Registry</strong>
+                    <p>The primary index engine hosting verified application dependencies, platform channels extensions,
+                        storage nodes, and plugins.</p>
+                    <a href="https://pub.dev/" target="_blank" class="btn-link">Search Plugins ↗</a>
+                </div>
+                <div class="doc-box">
+                    <strong>Flutter Gems Visual Director</strong>
+                    <p>An incredible categorized visual indexing asset map grouping compatible library integrations by
+                        specialized design and logic topics cleanly.</p>
+                    <a href="https://fluttergems.dev/" target="_blank" class="btn-link">Browse Catalog ↗</a>
+                </div>
+                <div class="doc-box">
+                    <strong>Rive Vector Systems</strong>
+                    <p>Incorporate interactive vector state-machines and ultra-light reactive motion assets straight
+                        onto layout layers natively without thread lag.</p>
+                    <a href="https://rive.app/" target="_blank" class="btn-link">Explore Rive ↗</a>
+                </div>
+                <div class="doc-box">
+                    <strong>LottieFiles Asset Library</strong>
+                    <p>Deploy lightweight, multi-platform JSON based schema animations into view ports smoothly to
+                        design polished onboarding flows.</p>
+                    <a href="https://lottiefiles.com/" target="_blank" class="btn-link">Find Animations ↗</a>
+                </div>
+                <div class="doc-box">
+                    <strong>UpLabs Component Blueprints</strong>
+                    <p>Deconstruct validated wireframes, typography structures, layout prototypes, and platform design
+                        trends for interface engineering inspiration.</p>
+                    <a href="https://www.uplabs.com/" target="_blank" class="btn-link">Review Layouts ↗</a>
+                </div>
+            </div>
+        </div>
+
+
+        <h3 class="phase-title" style="margin-top: 48px;">Core Infrastructure Protocols</h3>
+        <ul class="protocol-list">
+            <li>Execute <code>flutter doctor</code> inside your command shell profile before building views to confirm
+                structural alignments.</li>
+            <li>Avoid idle video watching habits; write along inside your editor to develop proper syntactic muscle
+                memory.</li>
+            <li>Deploy isolated testing scripts into DartPad (<code>dartpad.dev</code>) to instantly verify simple
+                functional concepts without overheads.</li>
+            <li>Consistently commit your compiled product patterns onto standard remote repositories like GitHub.</li>
+        </ul>
+
+        <div class="footer-note">
+            This roadmap is completely free and maps directly back to reliable open distribution channels. No hidden
+            paywall access frameworks required.
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(event, tabId) {
+            // Hide all tab content boxes
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Deactivate active states from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Reveal selected content block and apply styling class to active tab
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+
+</body>
+
+</html>
