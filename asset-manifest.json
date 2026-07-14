@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Flutter-Playlist-Recommandation-/static/css/main.a23dbbd5.css",
+    "main.js": "/Flutter-Playlist-Recommandation-/static/js/main.ac7c9858.js",
+    "static/js/453.2582387f.chunk.js": "/Flutter-Playlist-Recommandation-/static/js/453.2582387f.chunk.js",
+    "index.html": "/Flutter-Playlist-Recommandation-/index.html",
+    "main.a23dbbd5.css.map": "/Flutter-Playlist-Recommandation-/static/css/main.a23dbbd5.css.map",
+    "main.ac7c9858.js.map": "/Flutter-Playlist-Recommandation-/static/js/main.ac7c9858.js.map",
+    "453.2582387f.chunk.js.map": "/Flutter-Playlist-Recommandation-/static/js/453.2582387f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a23dbbd5.css",
+    "static/js/main.ac7c9858.js"
+  ]
+}
