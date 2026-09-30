@@ -1,90 +1,108 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export const InterviewSection = ({ interviewData, activeSubTab, onSubTabChange }) => {
-  const [closedIds, setClosedIds] = useState([]);
-
-  const toggleQuestion = (id) => {
-    setClosedIds(prev => 
-      prev.includes(id) ? prev.filter(closedId => closedId !== id) : [...prev, id]
-    );
-  };
-
-  if (!interviewData) return null;
-
   return (
-    <div className="animate-fade-in delay-2" style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <div style={{ textAlign: 'center' }}>
-        <h2 className="section-title">Interview Preparation</h2>
-        <p className="section-subtitle">Frequently asked questions across different experience levels.</p>
-      </div>
-      
-      <div className="interview-filters" style={{ justifyContent: 'center' }}>
-        <button 
-          className={`filter-chip ${activeSubTab === 'all' ? 'active' : ''}`}
-          onClick={() => onSubTabChange('all')}
-        >
-          All Levels
-        </button>
-        {interviewData.categories.map((cat, idx) => (
-          <button 
-            key={idx}
-            className={`filter-chip ${activeSubTab === cat.id ? 'active' : ''}`}
+    <div className="interview-section">
+      <h3 className="phase-title">{interviewData.sectionTitle}</h3>
+      <p style={{ color: '#64748B', marginBottom: '20px' }}>
+        {interviewData.description}
+      </p>
+
+      {/* --- SUB-NAVIGATION BAR (Category Wise) --- */}
+      <div 
+        className="sub-tabs-nav" 
+        style={{ 
+          display: 'flex', 
+          gap: '8px', 
+          overflowX: 'auto', 
+          paddingBottom: '8px', 
+          marginBottom: '24px',
+          borderBottom: '1px solid #E2E8F0'
+        }}
+      >
+        {interviewData.categories.map((cat) => (
+          <button
+            key={cat.id}
             onClick={() => onSubTabChange(cat.id)}
+            style={{
+              padding: '6px 14px',
+              fontSize: '13px',
+              fontWeight: '600',
+              borderRadius: '20px',
+              border: '1px solid',
+              borderColor: activeSubTab === cat.id ? '#2563EB' : '#E2E8F0',
+              backgroundColor: activeSubTab === cat.id ? '#EFF6FF' : '#FFFFFF',
+              color: activeSubTab === cat.id ? '#2563EB' : '#64748B',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              transition: 'all 0.2s ease'
+            }}
           >
             {cat.label}
           </button>
         ))}
       </div>
 
-      <div style={{ maxWidth: '800px' }}>
-        {interviewData.questions.length === 0 && (
-          <div>No questions found for this search/category.</div>
-        )}
-        
-        {interviewData.questions.map((q) => {
-          const isOpen = !closedIds.includes(q.id);
-          return (
-            <div key={q.id} className={`qa-card ${isOpen ? 'open' : ''}`}>
-              <div className="qa-header" onClick={() => toggleQuestion(q.id)}>
-                <div className="qa-question">
-                  <span style={{ color: 'var(--accent-color)', marginRight: '8px' }}>Q.</span>
-                  {q.question}
-                </div>
-                <div className="qa-icon">▼</div>
+      {/* --- QUESTIONS CONTAINER --- */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        {interviewData.questions.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '20px', color: '#64748B' }}>
+            No questions available in this category yet.
+          </div>
+        ) : (
+          interviewData.questions.map((item) => (
+            <div 
+              key={item.id} 
+              className="resource-card" 
+              style={{ borderLeft: '4px solid #2563EB', margin: 0 }}
+            >
+              <span className="badge badge-topic" style={{ marginBottom: '8px' }}>
+                {item.topic}
+              </span>
+              <div className="card-title" style={{ fontSize: '15px', marginTop: '4px' }}>
+                {item.question}
               </div>
-              <div className="qa-body">
-                <div className="badge badge-topic" style={{ marginBottom: '16px' }}>{q.topic}</div>
-                
-                <div className="qa-answer" style={{ marginBottom: '16px' }}>
-                  <strong style={{ color: 'var(--text-main)' }}>English: </strong>
-                  <span dangerouslySetInnerHTML={{ __html: q.answer.replace(/\n/g, '<br/>') }} />
+              
+              <div 
+                className="card-desc" 
+                style={{ 
+                  marginTop: '10px', 
+                  backgroundColor: '#F8FAFC', 
+                  padding: '12px', 
+                  borderRadius: '6px',
+                  color: '#334155',
+                  border: '1px solid #E2E8F0',
+                  lineHeight: '1.5'
+                }}
+              >
+                {/* ইংরেজি উত্তর */}
+                <div>
+                  <strong>Ans: </strong>{item.answer}
                 </div>
-                
-                {q.answerBn && (
-                  <div className="qa-answer" style={{ marginBottom: '16px', color: '#4B5563' }}>
-                    <strong style={{ color: 'var(--text-main)' }}>বাংলা: </strong>
-                    <span dangerouslySetInnerHTML={{ __html: q.answerBn.replace(/\n/g, '<br/>') }} />
+
+                {/* 🛠️ বাংলা উত্তর (যদি ডেটাতে answerBn থাকে তবেই দেখাবে) */}
+                {item.answerBn && (
+                  <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px dashed #E2E8F0', color: '#1E293B' }}>
+                    <strong style={{ color: '#2563EB' }}>বাংলা ব্যাখ্যা: </strong>{item.answerBn}
                   </div>
                 )}
-                
-                {q.example && (
-                  <div className="qa-answer" style={{ 
-                    marginTop: '16px', 
-                    padding: '12px 16px', 
-                    background: 'var(--bg-primary)', 
-                    borderLeft: '4px solid var(--accent-color)',
-                    borderRadius: '0 8px 8px 0',
-                    fontStyle: 'italic'
-                  }}>
-                    <strong style={{ color: 'var(--accent-color)', fontStyle: 'normal' }}>Example: </strong>
-                    <span dangerouslySetInnerHTML={{ __html: q.example.replace(/\n/g, '<br/>') }} />
+
+                {/* 🛠️ উদাহরণ/কোড (যদি ডেটাতে example থাকে তবেই দেখাবে) */}
+                {item.example && (
+                  <div style={{ marginTop: '10px', backgroundColor: '#F1F5F9', padding: '8px 12px', borderRadius: '4px', fontSize: '14px', color: '#475569' }}>
+                    <strong>💡 উদাহরণ: </strong>
+                    <pre style={{ margin: '4px 0 0 0', fontFamily: 'monospace', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                      {item.example}
+                    </pre>
                   </div>
                 )}
               </div>
             </div>
-          );
-        })}
+          ))
+        )}
       </div>
     </div>
   );
 };
+
+export default InterviewSection;

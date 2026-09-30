@@ -1,4 +1,3 @@
-// src/components/TabNavigation.jsx
 import React from 'react';
 
 // এখানে নিশ্চিত করা হয়েছে যে প্রপস হিসেবে onTabChange-ই রিসিভ হচ্ছে
