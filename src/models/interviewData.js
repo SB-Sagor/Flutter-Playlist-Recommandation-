@@ -132,7 +132,7 @@ export const initialInterviewData = {
       answer: "Overriding (Runtime Polymorphism) is providing a new implementation for a parent's method in a subclass (same name, same parameters). Overloading (Compile-time Polymorphism) is having multiple methods with the same name but different parameters in the same class (Note: Dart does NOT support overloading).",
       answerBn: "ওভাররাইডিং হলো প্যারেন্ট ক্লাসের কোনো মেথডকে চাইল্ড ক্লাসে এসে নিজের মতো করে নতুন করে লেখা (নাম ও প্যারামিটার একই থাকে)। আর ওভারলোডিং হলো একই ক্লাসে একই নামের একাধিক মেথড থাকা, তবে তাদের প্যারামিটার ভিন্ন হওয়া (ডার্ট ওভারলোডিং সাপোর্ট করে না, এর বদলে অপশনাল প্যারামিটার ব্যবহার করতে হয়)।",
       example: "Overriding: বাবার বাটন মোবাইল চালানোর স্টাইলকে ছেলে ওভাররাইড করে টাচস্ক্রিন চালানো শিখেছে। Overloading: একই 'add' ফাংশন একবার ২টা সংখ্যা যোগ করে, আরেকবার ৩টা সংখ্যা যোগ করে।"
-    }
+    },
     // --- DART ---
     { 
       id: "d-q1", 
