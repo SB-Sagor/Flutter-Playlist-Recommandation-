@@ -11,9 +11,47 @@ export const initialInterviewData = {
     { id: "database", label: "Database" },
     { id: "backend", label: "Backend" },
     { id: "dsa", label: "DSA" },
-    { id: "architecture", label: "Architecture (MVVM/Clean)" }
+    { id: "architecture", label: "Architecture (MVVM/Clean)" },
+    { id: "oop", label: "OOP" }
   ],
   questions: [
+    // --- OOP ---
+    {
+      id: "oop-q1",
+      category: "oop",
+      topic: "OOP Principles",
+      question: "What are the four pillars of Object-Oriented Programming?",
+      answer: "The four pillars are Encapsulation (hiding state), Abstraction (hiding implementation details), Inheritance (reusing code from parent classes), and Polymorphism (ability to take many forms).",
+      answerBn: "OOP এর প্রধান চারটি ভিত্তি হলো: এনক্যাপসুলেশন (ভেতরের ডেটা লুকিয়ে রাখা), অ্যাবস্ট্রাকশন (অপ্রয়োজনীয় জটিলতা লুকিয়ে শুধু কাজের জিনিস দেখানো), ইনহেরিটেন্স (পিতামাতার বৈশিষ্ট্য সন্তানের পাওয়া), এবং পলিমরফিজম (একই জিনিসের ভিন্ন ভিন্ন রূপ)।",
+      example: "ধরুন একটি গাড়ি। আপনি স্টিয়ারিং ঘোরালে গাড়ি ঘোরে, ভেতরে কী মেকানিজম কাজ করছে তা আপনার জানার দরকার নেই (Abstraction)। আবার গাড়ির ইঞ্জিনটি কভার দিয়ে ঢাকা থাকে যাতে কেউ সরাসরি তার ডেটা বা তারে হাত না দিতে পারে (Encapsulation)।"
+    },
+    {
+      id: "oop-q2",
+      category: "oop",
+      topic: "Polymorphism",
+      question: "What is Polymorphism and how is it achieved?",
+      answer: "Polymorphism means 'many forms'. It allows methods to do different things based on the object it is acting upon. It is achieved through method overriding (runtime) and method overloading (compile-time, though Dart doesn't support overloading directly).",
+      answerBn: "পলিমরফিজম মানে হলো 'বহুরূপতা'। এটি মেথডকে তার ক্লাসের ওপর ভিত্তি করে ভিন্ন ভিন্ন আচরণ করতে সাহায্য করে। সাধারণত মেথড ওভাররাইডিং (Overriding) এর মাধ্যমে এটি অর্জন করা হয়, যেখানে সাব-ক্লাস তার প্যারেন্ট ক্লাসের মেথডকে নিজের মতো করে পরিবর্তন করে নেয়।",
+      example: "ধরুন একটি 'Animal' ক্লাস আছে যার 'makeSound()' মেথড আছে। এখন 'Dog' ক্লাস اسے ওভাররাইড করে 'ঘেউ ঘেউ' করবে, আর 'Cat' ক্লাস ওভাররাইড করে 'মিউ মিউ' করবে। কল করা হবে একই 'makeSound()' মেথড, কিন্তু আউটপুট আসবে ভিন্ন!"
+    },
+    {
+      id: "oop-q3",
+      category: "oop",
+      topic: "Encapsulation",
+      question: "Explain Encapsulation and why it is important.",
+      answer: "Encapsulation is the bundling of data and the methods that operate on that data into a single unit (class), and restricting direct access to some of the object's components (using private fields and getters/setters).",
+      answerBn: "এনক্যাপসুলেশন হলো ডেটা (ভ্যারিয়েবল) এবং ডেটা নিয়ে কাজ করা ফাংশনগুলোকে একটি ক্লাসের মধ্যে আটকে রাখা এবং বাইরের দুনিয়া থেকে সেই ডেটাতে সরাসরি অ্যাক্সেস বন্ধ করে দেওয়া (প্রাইভেট ভ্যারিয়েবল এবং গেটার/সেটার ব্যবহার করে)।",
+      example: "আপনার ব্যাংক অ্যাকাউন্টের ব্যালেন্স হলো প্রাইভেট ডেটা। কেউ চাইলেই সরাসরি আপনার ব্যালেন্স পরিবর্তন করতে পারবে না। তাকে ব্যাংকের নির্দিষ্ট মেথড (যেমন- deposit() বা withdraw()) ব্যবহার করেই ব্যালেন্স পরিবর্তন করতে হবে। এটাই এনক্যাপসুলেশন!"
+    },
+    {
+      id: "oop-q4",
+      category: "oop",
+      topic: "Abstraction",
+      question: "What is Abstraction in OOP?",
+      answer: "Abstraction is the concept of hiding the complex reality while exposing only the essential parts. In Dart, this is often achieved using abstract classes or interfaces.",
+      answerBn: "অ্যাবস্ট্রাকশন হলো কোনো কিছুর পেছনের জটিল মেকানিজম বা লজিকগুলো লুকিয়ে রেখে শুধু দরকারী এবং সহজ ইন্টারফেসটি ব্যবহারকারীর সামনে তুলে ধরা। ডার্টে এটি অ্যাবস্ট্রাক্ট ক্লাস বা ইন্টারফেস দিয়ে করা হয়।",
+      example: "আপনি যখন কফি মেশিনের বোতাম চাপেন, তখন কফি তৈরি হয়ে বেরিয়ে আসে। ভেতরে কীভাবে পানি গরম হচ্ছে, কফি বিন গুঁড়ো হচ্ছে—এসব জটিলতা আপনার জানার দরকার নেই। কফি মেশিনের বোতামটিই হলো অ্যাবস্ট্রাকশন।"
+    },
     // --- DART ---
     { 
       id: "d-q1", 
