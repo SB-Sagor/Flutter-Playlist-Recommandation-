@@ -76,14 +76,24 @@ export const InterviewSection = ({ interviewData, activeSubTab, onSubTabChange }
                 }}
               >
                 {/* ইংরেজি উত্তর */}
-                <div>
+                <div style={{ whiteSpace: 'pre-line', lineHeight: '1.6' }}>
                   <strong>Ans: </strong>{item.answer}
                 </div>
 
                 {/* 🛠️ বাংলা উত্তর (যদি ডেটাতে answerBn থাকে তবেই দেখাবে) */}
                 {item.answerBn && (
-                  <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px dashed #E2E8F0', color: '#1E293B' }}>
+                  <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px dashed #E2E8F0', color: '#1E293B', whiteSpace: 'pre-line', lineHeight: '1.6' }}>
                     <strong style={{ color: '#2563EB' }}>বাংলা ব্যাখ্যা: </strong>{item.answerBn}
+                  </div>
+                )}
+
+                {/* 🛠️ কমান্ড / সিনট্যাক্স (যদি ডেটাতে command থাকে তবেই দেখাবে) */}
+                {item.command && (
+                  <div style={{ marginTop: '10px', backgroundColor: '#F1F5F9', padding: '8px 12px', borderRadius: '4px', fontSize: '14px', color: '#475569' }}>
+                    <strong>💻 কমান্ড / সিনট্যাক্স: </strong>
+                    <pre style={{ margin: '4px 0 0 0', fontFamily: 'monospace', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                      {item.command}
+                    </pre>
                   </div>
                 )}
 

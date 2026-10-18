@@ -4,7 +4,7 @@ import { initialPlaylistsData } from '../models/playlistsData';
 import { initialInterviewData } from '../models/interviewData';
 
 export const useDashboard = () => {
-  const [activeTab, setActiveTab] = useState('roadmap');
+  const [activeTab, setActiveTab] = useState('playlists');
   const [activeSubTab, setActiveSubTab] = useState('all'); 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -40,7 +40,8 @@ export const useDashboard = () => {
         q.question.toLowerCase().includes(query) ||
         q.answer.toLowerCase().includes(query) ||
         (q.answerBn && q.answerBn.toLowerCase().includes(query)) ||
-        (q.example && q.example.toLowerCase().includes(query))
+        (q.example && q.example.toLowerCase().includes(query)) ||
+        (q.command && q.command.toLowerCase().includes(query))
       );
     }
     
